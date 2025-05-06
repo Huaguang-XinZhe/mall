@@ -1,0 +1,12 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "mvn clean package -Dmaven.test.skip=true"
+
+[deploy]
+startCommand = "java -jar -Dspring.profiles.active=railway mall-admin/target/mall-admin-1.0-SNAPSHOT.jar"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[env]
+PORT = "8080"
+NIXPACKS_JDK_VERSION = "17" 
