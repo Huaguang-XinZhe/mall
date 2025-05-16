@@ -20,10 +20,23 @@ spring:
     timeout: 300ms # 连接超时时间（毫秒）
 
 minio:
-  endpoint: http://localhost:9000 #MinIO服务所在地址
+  endpoint: http://localhost:9090 #MinIO服务所在地址
   bucketName: mall #存储桶名称
-  accessKey: minioadmin #访问的key
-  secretKey: minioadmin #访问的秘钥
+  accessKey: xFSuGO7P4T254wQOG5Hf #访问的key
+  secretKey: FBNNL5u3RdUayXlOAXpWrAA2klWU4c8xNqps3cpd #访问的秘钥
+
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com # 阿里云OSS域名
+    accessKeyId: yourAccessKeyId # 访问身份验证中用到的AccessKeyId
+    accessKeySecret: yourAccessKeySecret # 用户秘钥AccessKeySecret
+    bucketName: your-bucket-name # OSS的存储空间
+    policy:
+      expire: 300 # 签名有效期(S)
+    maxSize: 10 # 上传文件大小(M)
+    callback: http://localhost:8080/aliyun/oss/callback # 文件上传成功后的回调地址
+    dir:
+      prefix: mall/images/ # 上传文件夹路径前缀
 
 logging:
   level:
