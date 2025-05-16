@@ -1,0 +1,106 @@
+services:
+  # 基础设施服务
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=59sgYlQuiXoE
+      - MYSQL_DATABASE=mall
+      - MYSQL_USER=mufengtech
+      - MYSQL_PASSWORD=59sgYlQuiXoE
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mall-net
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mall-net
+    restart: always
+
+  mongodb:
+    image: mongodb/mongodb-community-server
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mufengtech
+      - MONGO_INITDB_ROOT_PASSWORD=59sgYlQuiXoE
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mall-net
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=mufengtech
+      - RABBITMQ_DEFAULT_PASS=59sgYlQuiXoE
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mall-net
+    restart: always
+
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=mufengtech
+      - MINIO_ROOT_PASSWORD=59sgYlQuiXoE
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address=":9001"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mall-net
+    restart: always
+
+networks:
+  mall-net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  redis_data:
+  mongodb_data:
+  minio_data:

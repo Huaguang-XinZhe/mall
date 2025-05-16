@@ -1,0 +1,37 @@
+services:
+  # 应用服务
+  mall-admin:
+    image: mall/mall-admin:1.0-SNAPSHOT
+    container_name: mall-admin
+    ports:
+      - 8080:8080
+    volumes:
+      - /app/mall-admin/logs:/var/logs
+      - /etc/localtime:/etc/localtime
+      - ./config/admin:/app/config
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_CONFIG_LOCATION=file:/app/config/
+    networks:
+      - mall-net
+    restart: always
+
+  mall-portal:
+    image: mall/mall-portal:1.0-SNAPSHOT
+    container_name: mall-portal
+    ports:
+      - 8085:8085
+    volumes:
+      - /app/mall-portal/logs:/var/logs
+      - /etc/localtime:/etc/localtime
+      - ./config/portal:/app/config
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_CONFIG_LOCATION=file:/app/config/
+    networks:
+      - mall-net
+    restart: always
+
+networks:
+  mall-net:
+    external: true

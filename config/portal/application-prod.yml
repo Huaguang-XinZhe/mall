@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: mufengtech
+    password: 59sgYlQuiXoE
+    druid:
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        login-username: druid
+        login-password: druid
+  redis:
+    host: redis
+    database: 0
+    port: 6379
+    password:
+    timeout: 300ms
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: mall-port
+      username: mufengtech
+      password: 59sgYlQuiXoE
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    virtual-host: /mall
+    username: mufengtech
+    password: 59sgYlQuiXoE
+    publisher-confirms: true
+
+minio:
+  endpoint: http://minio:9000
+  bucketName: mall
+  accessKey: aiWedrA7aIIA8kzuB1cP
+  secretKey: GmcQbAxQyUqteUeF1XcCvjfdl05KooyQtrXMIgON
+
+logging:
+  file:
+    path: /var/logs
+  level:
+    root: info
+    com.macro.mall: info
