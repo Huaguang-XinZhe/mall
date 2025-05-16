@@ -25,6 +25,19 @@ minio:
   accessKey: aiWedrA7aIIA8kzuB1cP
   secretKey: GmcQbAxQyUqteUeF1XcCvjfdl05KooyQtrXMIgON
 
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    accessKeyId: yourAccessKeyId
+    accessKeySecret: yourAccessKeySecret
+    bucketName: your-bucket-name
+    policy:
+      expire: 300
+    maxSize: 10
+    callback: http://your-production-callback-url/aliyun/oss/callback
+    dir:
+      prefix: mall/images/
+
 logging:
   file:
     path: /var/logs

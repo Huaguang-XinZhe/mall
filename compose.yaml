@@ -73,6 +73,14 @@ services:
     networks:
       - mall-net
     restart: always
+    command: >
+      bash -c "
+        rabbitmq-server &
+        sleep 10 &&
+        rabbitmqctl add_vhost /mall &&
+        rabbitmqctl set_permissions -p /mall mufengtech '.*' '.*' '.*' &&
+        tail -f /dev/null
+      "
 
   minio:
     image: minio/minio
