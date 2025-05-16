@@ -33,6 +33,11 @@ spring:
     password: 59sgYlQuiXoE
     publisher-confirms: true
 
+# 添加缺失的配置
+mongo:
+  insert:
+    sqlEnable: true
+
 minio:
   endpoint: http://minio:9000
   bucketName: mall
