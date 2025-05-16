@@ -35,5 +35,5 @@ services:
     restart: always
 
 networks:
-  mall-net:
+  app-mall-net:
     external: true
