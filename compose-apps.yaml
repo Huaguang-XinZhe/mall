@@ -1,7 +1,8 @@
 services:
   # 应用服务
   mall-admin:
-    image: mall/mall-admin:1.0-SNAPSHOT
+    # 用的本地镜像
+    image: mall-admin:latest
     container_name: mall-admin
     ports:
       - 8080:8080
@@ -17,7 +18,8 @@ services:
     restart: always
 
   mall-portal:
-    image: mall/mall-portal:1.0-SNAPSHOT
+    # 用的本地镜像
+    image: mall-portal:latest
     container_name: mall-portal
     ports:
       - 8085:8085
