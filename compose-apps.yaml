@@ -14,7 +14,7 @@ services:
       - TZ=Asia/Shanghai
       - SPRING_CONFIG_LOCATION=file:/app/config/
     networks:
-      - app_mall-net
+      - mall_mall-net
     restart: always
 
   mall-portal:
@@ -31,9 +31,9 @@ services:
       - TZ=Asia/Shanghai
       - SPRING_CONFIG_LOCATION=file:/app/config/
     networks:
-      - app_mall-net
+      - mall_mall-net
     restart: always
 
 networks:
-  app_mall-net:
+  mall_mall-net:
     external: true
